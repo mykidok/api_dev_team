@@ -64,6 +64,15 @@ class Article
     private $poster;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="text", nullable=false)
+     *
+     * @Groups({"article", "article_write"})
+     */
+    private $content;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", nullable=false)
@@ -179,6 +188,21 @@ class Article
     public function setIsValid(bool $isValid): self
     {
         $this->isValid = $isValid;
+
+        return $this;
+    }
+
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    /**
+     * @return Article
+     */
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
 
         return $this;
     }
