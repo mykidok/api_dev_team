@@ -2,7 +2,12 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -27,6 +32,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "denormalizationContext"={"groups"={"article_write"}}
  *     }
  * )
+ *
+ * @ApiFilter(OrderFilter::class, properties={"id", "title", "date"})
+ * @ApiFilter(SearchFilter::class, properties={"title": "partial", "chronicle": "exact"})
+ * @ApiFilter(BooleanFilter::class)
+ * @ApiFilter(DateFilter::class)
  */
 class Article
 {

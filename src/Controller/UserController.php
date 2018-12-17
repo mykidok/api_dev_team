@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
@@ -110,7 +111,7 @@ class UserController extends AbstractController
 
         $message = (new \Swift_Message('Hello Email'))
             ->setFrom('send@example.com')
-            ->setTo('recipient@example.com')
+            ->setTo($user->getUsername())
             ->setBody(
                 $this->renderView(
                 // templates/emails/registration.html.twig
